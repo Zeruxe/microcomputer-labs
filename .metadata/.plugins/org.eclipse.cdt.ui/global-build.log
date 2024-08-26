@@ -1,4 +1,4 @@
-14:02:08 **** Incremental Build of configuration Debug for project Lab0_Blinky ****
+14:36:55 **** Incremental Build of configuration Debug for project Lab0_Blinky ****
 make -j16 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 arm-none-eabi-gcc -o "Lab0_Blinky.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\46700\Desktop\School Projects\MicroComputer_HT24\Lab0_Blinky\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Lab0_Blinky.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
@@ -7,29 +7,50 @@ Finished building target: Lab0_Blinky.elf
 arm-none-eabi-size  Lab0_Blinky.elf 
 arm-none-eabi-objdump -h -S Lab0_Blinky.elf  > "Lab0_Blinky.list"
    text	   data	    bss	    dec	    hex	filename
-   7764	     12	   1644	   9420	   24cc	Lab0_Blinky.elf
+  11132	     92	   1972	  13196	   338c	Lab0_Blinky.elf
 Finished building: default.size.stdout
  
 Finished building: Lab0_Blinky.list
  
-14:02:31 **** Incremental Build of configuration Debug for project Lab0_Blinky ****
+14:41:38 **** Incremental Build of configuration Debug for project Lab0_Blinky ****
 make -j16 all 
 arm-none-eabi-size  Lab0_Blinky.elf 
    text	   data	    bss	    dec	    hex	filename
-   7764	     12	   1644	   9420	   24cc	Lab0_Blinky.elf
+  11132	     92	   1972	  13196	   338c	Lab0_Blinky.elf
 Finished building: default.size.stdout
  
-14:04:26 **** Incremental Build of configuration Debug for project Lab0_Blinky ****
+14:41:52 **** Incremental Build of configuration Debug for project Lab0_Blinky ****
 make -j16 all 
 arm-none-eabi-size  Lab0_Blinky.elf 
    text	   data	    bss	    dec	    hex	filename
-   7764	     12	   1644	   9420	   24cc	Lab0_Blinky.elf
+  11132	     92	   1972	  13196	   338c	Lab0_Blinky.elf
 Finished building: default.size.stdout
  
-14:04:39 **** Incremental Build of configuration Debug for project Lab0_Blinky ****
+14:57:39 **** Incremental Build of configuration Debug for project Lab0_Blinky ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Lab0_Blinky.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\46700\Desktop\School Projects\MicroComputer_HT24\Lab0_Blinky\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Lab0_Blinky.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Lab0_Blinky.elf
+ 
+arm-none-eabi-size  Lab0_Blinky.elf 
+arm-none-eabi-objdump -h -S Lab0_Blinky.elf  > "Lab0_Blinky.list"
+   text	   data	    bss	    dec	    hex	filename
+  11128	     92	   1972	  13192	   3388	Lab0_Blinky.elf
+Finished building: default.size.stdout
+ 
+Finished building: Lab0_Blinky.list
+ 
+15:02:36 **** Incremental Build of configuration Debug for project Lab0_Blinky ****
 make -j16 all 
 arm-none-eabi-size  Lab0_Blinky.elf 
    text	   data	    bss	    dec	    hex	filename
-   7764	     12	   1644	   9420	   24cc	Lab0_Blinky.elf
+  11128	     92	   1972	  13192	   3388	Lab0_Blinky.elf
+Finished building: default.size.stdout
+ 
+15:19:26 **** Incremental Build of configuration Debug for project Lab0_Blinky ****
+make -j16 all 
+arm-none-eabi-size  Lab0_Blinky.elf 
+   text	   data	    bss	    dec	    hex	filename
+  11128	     92	   1972	  13192	   3388	Lab0_Blinky.elf
 Finished building: default.size.stdout
  

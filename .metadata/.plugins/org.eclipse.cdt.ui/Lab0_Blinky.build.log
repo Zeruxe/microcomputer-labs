@@ -1,10 +1,10 @@
-14:04:39 **** Incremental Build of configuration Debug for project Lab0_Blinky ****
+15:19:26 **** Incremental Build of configuration Debug for project Lab0_Blinky ****
 make -j16 all 
 arm-none-eabi-size  Lab0_Blinky.elf 
    text	   data	    bss	    dec	    hex	filename
-   7764	     12	   1644	   9420	   24cc	Lab0_Blinky.elf
+  11128	     92	   1972	  13192	   3388	Lab0_Blinky.elf
 Finished building: default.size.stdout
  
 
-14:04:39 Build Finished. 0 errors, 0 warnings. (took 313ms)
+15:19:27 Build Finished. 0 errors, 0 warnings. (took 485ms)
 
