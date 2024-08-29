@@ -462,39 +462,38 @@ int main(void)
  80005a2:	2120      	movs	r1, #32
  80005a4:	4812      	ldr	r0, [pc, #72]	@ (80005f0 <main+0x80>)
  80005a6:	f000 fd45 	bl	8001034 <HAL_GPIO_WritePin>
-	 HAL_Delay(200);
- 80005aa:	20c8      	movs	r0, #200	@ 0xc8
- 80005ac:	f000 fab4 	bl	8000b18 <HAL_Delay>
+	 HAL_Delay(2000);
+ 80005aa:	f44f 60fa 	mov.w	r0, #2000	@ 0x7d0
+ 80005ae:	f000 fab3 	bl	8000b18 <HAL_Delay>
 	 HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
- 80005b0:	2200      	movs	r2, #0
- 80005b2:	2120      	movs	r1, #32
- 80005b4:	480e      	ldr	r0, [pc, #56]	@ (80005f0 <main+0x80>)
- 80005b6:	f000 fd3d 	bl	8001034 <HAL_GPIO_WritePin>
-	 HAL_Delay(800);
- 80005ba:	f44f 7048 	mov.w	r0, #800	@ 0x320
- 80005be:	f000 faab 	bl	8000b18 <HAL_Delay>
+ 80005b2:	2200      	movs	r2, #0
+ 80005b4:	2120      	movs	r1, #32
+ 80005b6:	480e      	ldr	r0, [pc, #56]	@ (80005f0 <main+0x80>)
+ 80005b8:	f000 fd3c 	bl	8001034 <HAL_GPIO_WritePin>
+	 HAL_Delay(8000);
+ 80005bc:	f44f 50fa 	mov.w	r0, #8000	@ 0x1f40
+ 80005c0:	f000 faaa 	bl	8000b18 <HAL_Delay>
 	 n_blink++;
- 80005c2:	6d7b      	ldr	r3, [r7, #84]	@ 0x54
- 80005c4:	3301      	adds	r3, #1
- 80005c6:	657b      	str	r3, [r7, #84]	@ 0x54
+ 80005c4:	6d7b      	ldr	r3, [r7, #84]	@ 0x54
+ 80005c6:	3301      	adds	r3, #1
+ 80005c8:	657b      	str	r3, [r7, #84]	@ 0x54
 	 str_len = sprintf(str, "Blinky has succeded %d times \r\n", n_blink);
- 80005c8:	463b      	mov	r3, r7
- 80005ca:	6d7a      	ldr	r2, [r7, #84]	@ 0x54
- 80005cc:	4909      	ldr	r1, [pc, #36]	@ (80005f4 <main+0x84>)
- 80005ce:	4618      	mov	r0, r3
- 80005d0:	f001 fdee 	bl	80021b0 <siprintf>
- 80005d4:	4603      	mov	r3, r0
- 80005d6:	f8a7 3052 	strh.w	r3, [r7, #82]	@ 0x52
+ 80005ca:	463b      	mov	r3, r7
+ 80005cc:	6d7a      	ldr	r2, [r7, #84]	@ 0x54
+ 80005ce:	4909      	ldr	r1, [pc, #36]	@ (80005f4 <main+0x84>)
+ 80005d0:	4618      	mov	r0, r3
+ 80005d2:	f001 fded 	bl	80021b0 <siprintf>
+ 80005d6:	4603      	mov	r3, r0
+ 80005d8:	f8a7 3052 	strh.w	r3, [r7, #82]	@ 0x52
 	 HAL_UART_Transmit(&huart2, (uint8_t*) str, str_len, HAL_MAX_DELAY);
- 80005da:	f8b7 2052 	ldrh.w	r2, [r7, #82]	@ 0x52
- 80005de:	4639      	mov	r1, r7
- 80005e0:	f04f 33ff 	mov.w	r3, #4294967295
- 80005e4:	4804      	ldr	r0, [pc, #16]	@ (80005f8 <main+0x88>)
- 80005e6:	f001 fa27 	bl	8001a38 <HAL_UART_Transmit>
+ 80005dc:	f8b7 2052 	ldrh.w	r2, [r7, #82]	@ 0x52
+ 80005e0:	4639      	mov	r1, r7
+ 80005e2:	f04f 33ff 	mov.w	r3, #4294967295
+ 80005e6:	4804      	ldr	r0, [pc, #16]	@ (80005f8 <main+0x88>)
+ 80005e8:	f001 fa26 	bl	8001a38 <HAL_UART_Transmit>
 	 HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
- 80005ea:	bf00      	nop
- 80005ec:	e7d8      	b.n	80005a0 <main+0x30>
- 80005ee:	bf00      	nop
+ 80005ec:	bf00      	nop
+ 80005ee:	e7d7      	b.n	80005a0 <main+0x30>
  80005f0:	40020000 	.word	0x40020000
  80005f4:	08002b08 	.word	0x08002b08
  80005f8:	20000078 	.word	0x20000078

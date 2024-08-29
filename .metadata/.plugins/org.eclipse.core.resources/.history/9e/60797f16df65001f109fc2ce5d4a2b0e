@@ -101,9 +101,9 @@ int main(void)
   {
     /* USER CODE END WHILE */
 	 HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
-	 HAL_Delay(2000);
+	 HAL_Delay(200);
 	 HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-	 HAL_Delay(8000);
+	 HAL_Delay(800);
 	 n_blink++;
 	 str_len = sprintf(str, "Blinky has succeded %d times \r\n", n_blink);
 	 HAL_UART_Transmit(&huart2, (uint8_t*) str, str_len, HAL_MAX_DELAY);
