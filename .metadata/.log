@@ -487,3 +487,21 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 C:\Users\46700\Desktop
 
 !ENTRY org.eclipse.cdt.core 1 0 2024-08-29 10:16:29.866
 !MESSAGE Indexed 'Lab0_Blinky' (22 sources, 82 headers) in 4.98 sec: 4,760 declarations; 22,652 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0073%)
+!SESSION 2024-09-02 13:11:29.279 -----------------------------------------------
+eclipse.buildId=Version 1.16.0
+java.version=17.0.11
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_GB
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-09-02 13:12:03.827
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-09-02 13:12:03.843
+!MESSAGE Log4j2 initialized with config file C:\Users\46700\Desktop\School Projects\MicroComputer_HT24\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-09-02 13:12:27.942
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-09-02 13:14:45.727
+!MESSAGE Indexed 'Lab1_Tarning' (22 sources, 82 headers) in 5.02 sec: 4,755 declarations; 22,614 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0073%)
