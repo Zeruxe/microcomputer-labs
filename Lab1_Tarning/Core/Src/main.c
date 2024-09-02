@@ -95,10 +95,22 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  int pressed = 0;
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  pressed = HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin);
+	  if (pressed)
+	  {
+		  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
+	  }
+	  else
+	  {
+		  GPIO_TypeDef* Id2_gpio    = GPIOA;
+		  uint16_t      Id2_pin_nbr = 5;
+		  uint16_t 	    Id2_pin     = 0x01 << Id2_pin_nbr;
+		  HAL_GPIO_WritePin(Id2_gpio, Id2_pin, GPIO_PIN_RESET);
+	  }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
