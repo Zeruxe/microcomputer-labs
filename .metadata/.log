@@ -535,3 +535,22 @@ org.eclipse.core.runtime.AssertionFailedException: assertion failed: The applica
 
 !ENTRY org.eclipse.core.jobs 2 2 2024-09-02 14:33:10.886
 !MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.eclipse.cdt.dsf.gdb.internal.ui.console.GdbBasicCliConsole$InputReadJob
+!SESSION 2024-09-02 14:38:05.547 -----------------------------------------------
+eclipse.buildId=Version 1.16.0
+java.version=17.0.11
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_GB
+Framework arguments:  C:\Users\46700\Desktop\School Projects\MicroComputer_HT24\Lab1_Tarning\.project
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 C:\Users\46700\Desktop\School Projects\MicroComputer_HT24\Lab1_Tarning\.project
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-09-02 14:38:20.317
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-09-02 14:38:20.322
+!MESSAGE Log4j2 initialized with config file C:\Users\46700\Desktop\School Projects\MicroComputer_HT24\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-09-02 14:38:26.492
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-09-02 14:38:30.314
+!MESSAGE Indexed 'Lab1_Tarning' (22 sources, 119 headers) in 2.55 sec: 11,528 declarations; 43,101 references; 1 unresolved inclusions; 92 syntax errors; 240 unresolved names (0.44%)
