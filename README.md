@@ -24,3 +24,6 @@ Lab4       : in Progress!
 
 # Week 6
 Lab5       : in Progress!
+
+# Week 7
+Lab5       : in Progress!
