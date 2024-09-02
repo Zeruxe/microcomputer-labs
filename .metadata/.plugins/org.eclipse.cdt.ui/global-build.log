@@ -1,49 +1,21 @@
-14:23:10 **** Incremental Build of configuration Debug for project Lab1_Tarning ****
+16:04:41 **** Incremental Build of configuration Debug for project Lab1_Tarning ****
 make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Lab1_Tarning.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\46700\Desktop\School Projects\MicroComputer_HT24\Lab1_Tarning\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Lab1_Tarning.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Lab1_Tarning.elf
+ 
 arm-none-eabi-size  Lab1_Tarning.elf 
+arm-none-eabi-objdump -h -S Lab1_Tarning.elf  > "Lab1_Tarning.list"
    text	   data	    bss	    dec	    hex	filename
-   7776	     12	   1644	   9432	   24d8	Lab1_Tarning.elf
+   7780	     12	   1644	   9436	   24dc	Lab1_Tarning.elf
 Finished building: default.size.stdout
  
-14:24:14 **** Incremental Build of configuration Debug for project Lab1_Tarning ****
-make -j16 all 
-arm-none-eabi-size  Lab1_Tarning.elf 
-   text	   data	    bss	    dec	    hex	filename
-   7776	     12	   1644	   9432	   24d8	Lab1_Tarning.elf
-Finished building: default.size.stdout
+Finished building: Lab1_Tarning.list
  
-14:24:57 **** Incremental Build of configuration Debug for project Lab1_Tarning ****
+16:04:44 **** Incremental Build of configuration Debug for project Lab1_Tarning ****
 make -j16 all 
 arm-none-eabi-size  Lab1_Tarning.elf 
    text	   data	    bss	    dec	    hex	filename
-   7776	     12	   1644	   9432	   24d8	Lab1_Tarning.elf
-Finished building: default.size.stdout
- 
-14:25:28 **** Incremental Build of configuration Debug for project Lab1_Tarning ****
-make -j16 all 
-arm-none-eabi-size  Lab1_Tarning.elf 
-   text	   data	    bss	    dec	    hex	filename
-   7776	     12	   1644	   9432	   24d8	Lab1_Tarning.elf
-Finished building: default.size.stdout
- 
-14:25:33 **** Incremental Build of configuration Debug for project Lab1_Tarning ****
-make -j16 all 
-arm-none-eabi-size  Lab1_Tarning.elf 
-   text	   data	    bss	    dec	    hex	filename
-   7776	     12	   1644	   9432	   24d8	Lab1_Tarning.elf
-Finished building: default.size.stdout
- 
-14:26:31 **** Incremental Build of configuration Debug for project Lab1_Tarning ****
-make -j16 all 
-arm-none-eabi-size  Lab1_Tarning.elf 
-   text	   data	    bss	    dec	    hex	filename
-   7776	     12	   1644	   9432	   24d8	Lab1_Tarning.elf
-Finished building: default.size.stdout
- 
-14:31:45 **** Incremental Build of configuration Debug for project Lab1_Tarning ****
-make -j16 all 
-arm-none-eabi-size  Lab1_Tarning.elf 
-   text	   data	    bss	    dec	    hex	filename
-   7776	     12	   1644	   9432	   24d8	Lab1_Tarning.elf
+   7780	     12	   1644	   9436	   24dc	Lab1_Tarning.elf
 Finished building: default.size.stdout
  

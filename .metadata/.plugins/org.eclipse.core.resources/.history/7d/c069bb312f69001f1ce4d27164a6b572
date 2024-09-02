@@ -52,7 +52,6 @@ static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 int is_blue_button_pressed();
-void put_die_dots(uint8_t die_nbr);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -61,31 +60,15 @@ void put_die_dots(uint8_t die_nbr);
 //returns 0 if blue button is unpressed'
 int is_blue_button_pressed()
 {
-	uint32_t reg_reading = GPIOC->IDR;
-	uint16_t blue_button = 1 << 13;
+	uint32_t reg_reading = GPIOC->IDR
 
-	int bitValue = (reg_reading & blue_button) ? 1 : 0;
-	if(bitValue)
-	{
+
+	if (reg_reading){
+		return 1;
+	} else {
 		return 0;
 	}
-	else
-	{
-		return 1;
-	}
-
 }
-
-
-void put_die_dots(uint8_t die_nbr)
-{
-	switch case
-
-
-}
-
-
-
 /* USER CODE END 0 */
 
 /**
@@ -131,18 +114,9 @@ int main(void)
 	  //pressed = HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin);
 	  pressed = is_blue_button_pressed();
 
-	  uint8_t die_value = 1; // 1 <= die value <= 6
-
-
 	  if (pressed)
 	  {
 		  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
-
-		  if (die_value == 6){
-			  die_value = 1;
-		  } else {
-			  die_value++;
-		  }
 	  }
 	  else
 	  {
@@ -150,7 +124,6 @@ int main(void)
 		  uint16_t      Id2_pin_nbr = 5;
 		  uint16_t 	    Id2_pin     = 0x01 << Id2_pin_nbr;
 		  HAL_GPIO_WritePin(Id2_gpio, Id2_pin, GPIO_PIN_RESET);
-		  put_die_dots(die_value);
 	  }
     /* USER CODE BEGIN 3 */
   }

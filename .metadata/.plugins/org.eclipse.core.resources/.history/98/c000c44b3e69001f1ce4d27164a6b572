@@ -79,7 +79,7 @@ int is_blue_button_pressed()
 
 void put_die_dots(uint8_t die_nbr)
 {
-	switch case
+
 
 
 }

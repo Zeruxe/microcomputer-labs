@@ -79,7 +79,7 @@ int is_blue_button_pressed()
 
 void put_die_dots(uint8_t die_nbr)
 {
-	switch case
+
 
 
 }
@@ -138,11 +138,6 @@ int main(void)
 	  {
 		  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
 
-		  if (die_value == 6){
-			  die_value = 1;
-		  } else {
-			  die_value++;
-		  }
 	  }
 	  else
 	  {
@@ -150,7 +145,6 @@ int main(void)
 		  uint16_t      Id2_pin_nbr = 5;
 		  uint16_t 	    Id2_pin     = 0x01 << Id2_pin_nbr;
 		  HAL_GPIO_WritePin(Id2_gpio, Id2_pin, GPIO_PIN_RESET);
-		  put_die_dots(die_value);
 	  }
     /* USER CODE BEGIN 3 */
   }

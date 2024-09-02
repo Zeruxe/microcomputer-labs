@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <stdio.h>
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -51,11 +51,13 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
-
+int is_blue_button_pressed();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+//returns 1 if blue button is pressed
+//returns 0 if blue button is unpressed'
 
 /* USER CODE END 0 */
 
@@ -90,24 +92,29 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  char 		str[81] = { '\0' };
-  uint16_t	str_len = 0;
-  int 		n_blink = 0;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  int pressed = 0;
   while (1)
   {
     /* USER CODE END WHILE */
-	 HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
-	 HAL_Delay(200);
+	  //pressed = HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin);
+	  pressed = is_blue_button_pressed();
 
-	 HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-	 HAL_Delay(800);
-	 n_blink++;
-	 str_len = sprintf(str, "Blinky has succeded %d times \r\n", n_blink);
-	 HAL_UART_Transmit(&huart2, (uint8_t*) str, str_len, HAL_MAX_DELAY);
+	  if (pressed)
+	  {
+		  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
+	  }
+	  else
+	  {
+		  GPIO_TypeDef* Id2_gpio    = GPIOA;
+		  uint16_t      Id2_pin_nbr = 5;
+		  uint16_t 	    Id2_pin     = 0x01 << Id2_pin_nbr;
+		  HAL_GPIO_WritePin(Id2_gpio, Id2_pin, GPIO_PIN_RESET);
+	  }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
