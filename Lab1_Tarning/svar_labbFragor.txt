@@ -16,7 +16,7 @@
 6. ODR står för output data register
 
 
-7. 4 ben 
+7. 4 ben  00,01,10,11
 
 
 8. läge "00"
@@ -32,6 +32,17 @@
 
 1. PC står på: 0x80004ca <main+6> när debuggern är pausad på HAL
 
-2. BUS: Cortex - M4 , Peripheral är Reserved 
+2. Flasminne
 
-3. Den släcks när du trycker på den blåa knappen - alltså är den aktivt hög.
+3. Aktivt låg 
+
+4. Alla på GPIOC är släckta förutom IDR-Input dat register är på. och på GPIOA är alla förutom BSRR på
+   medans när man inte rör knappen och pausasr sedan startar igen så släcks alla på GPIOA och ALLA på GPIOC förutom IDR.
+
+5. Systick ändrar adress efter varje start och paus 
+
+6. Detta beror på att koden tickar ett klockslag i taget när man kör och pausar koden om och om igen.
+
+
+
+
