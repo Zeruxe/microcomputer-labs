@@ -191,7 +191,6 @@ enum event evq_pop_front()
 		evq[evq_front_ix] = ev_error;
 		evq_front_ix++;
 		evq_front_ix %= EVQ_SIZE;
-		evq_count--;
 	}
 		return e;
 }
@@ -351,12 +350,13 @@ int main(void)
 	                case s_car_stopped:
 	                    if ( ev == ev_state_timeout )
 	                    {
-	                        ev = ev_none; // clear event
+	                        // clear event
 	                        current_state = s_go_people; // set next state
 	                        ticks_left_in_state = 2500; // set next timeout
 	                        set_traffic_lights(s_go_people);
 	                        abuzz_start();
 	                        abuzz_p_short(); // set output
+	                        ev = ev_none;
 	                    }
 	                	 break;
 	                case s_go_people:
@@ -383,7 +383,6 @@ int main(void)
 	  			  	  {
 	  			  		  ev = ev_none;
 	  			  		  current_state= s_car_go;
-	  			  		  //ticks_left_in_state = 2000;
 	  			  		  set_traffic_lights(s_car_go);
 	  			  	  }
 	                	break;

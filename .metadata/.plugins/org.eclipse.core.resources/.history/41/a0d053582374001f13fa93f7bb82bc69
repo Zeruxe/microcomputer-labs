@@ -191,23 +191,19 @@ enum event evq_pop_front()
 		evq[evq_front_ix] = ev_error;
 		evq_front_ix++;
 		evq_front_ix %= EVQ_SIZE;
-		evq_count--;
 	}
 		return e;
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-    static uint32_t last_interrupt_time = 0;
-    uint32_t current_time = HAL_GetTick(); // Get current tick
-
-    if (GPIO_Pin == B1_Pin && (current_time - last_interrupt_time) > 200) // 200 ms debounce
+    if (GPIO_Pin == B1_Pin)
     {
-        last_interrupt_time = current_time;  // Update last interrupt time
+        // Event button push registered
+        printf("Button pressed!\n");  // Debug message
         evq_push_back(ev_button_push);
     }
 }
-
 
 int systick_count = 0;
 
@@ -325,8 +321,8 @@ int main(void)
 	              		  current_state 	   = s_pushed_wait;
 	              		  ticks_left_in_state = 2000;
 	              		  set_traffic_lights(s_pushed_wait);
-	              		  abuzz_start();
-	              		  abuzz_p_long();
+	              		  //abuzz_start();
+	              		  //abuzz_p_long();
 	              	  }
 	                	  break;
 	                case s_pushed_wait:
@@ -345,28 +341,29 @@ int main(void)
 	              		  current_state = s_car_stopped;
 	              		  ticks_left_in_state = 1000;
 	              		  set_traffic_lights(s_car_stopped);
-	              		  abuzz_stop();
+	              		  //abuzz_stop();
 	              	  }
 	                	  break;
 	                case s_car_stopped:
-	                    if ( ev == ev_state_timeout )
-	                    {
-	                        ev = ev_none; // clear event
-	                        current_state = s_go_people; // set next state
-	                        ticks_left_in_state = 2500; // set next timeout
-	                        set_traffic_lights(s_go_people);
-	                        abuzz_start();
-	                        abuzz_p_short(); // set output
-	                    }
+	              	  if ( ev == ev_state_timeout )
+	              	  {
+	  					  ev = ev_none; // clear event
+	  					  current_state = s_go_people; // set next state
+	  					  ticks_left_in_state = 2500; // set next timeout
+	  					  set_traffic_lights(s_go_people);
+	  					  //abuzz_start();
+	  					  //abuzz_p_short();// set output
+	              	  }
 	                	 break;
 	                case s_go_people:
+
 	              	  if(ev == ev_state_timeout)
 	              	  {
 	              		  ev = ev_none;
 	              		  current_state = s_stop_people;
 	              		  ticks_left_in_state = 5000;
 	              		  set_traffic_lights(s_stop_people);
-	              		  abuzz_stop();
+	              		  //abuzz_stop();
 	              	  }
 	                	break;
 	                case s_stop_people:
@@ -383,7 +380,6 @@ int main(void)
 	  			  	  {
 	  			  		  ev = ev_none;
 	  			  		  current_state= s_car_go;
-	  			  		  //ticks_left_in_state = 2000;
 	  			  		  set_traffic_lights(s_car_go);
 	  			  	  }
 	                	break;

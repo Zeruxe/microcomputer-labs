@@ -191,7 +191,6 @@ enum event evq_pop_front()
 		evq[evq_front_ix] = ev_error;
 		evq_front_ix++;
 		evq_front_ix %= EVQ_SIZE;
-		evq_count--;
 	}
 		return e;
 }

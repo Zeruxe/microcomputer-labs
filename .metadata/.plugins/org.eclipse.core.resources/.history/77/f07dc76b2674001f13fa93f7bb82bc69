@@ -191,7 +191,6 @@ enum event evq_pop_front()
 		evq[evq_front_ix] = ev_error;
 		evq_front_ix++;
 		evq_front_ix %= EVQ_SIZE;
-		evq_count--;
 	}
 		return e;
 }
@@ -309,87 +308,88 @@ int main(void)
 
 
 	        switch (current_state) {
-	                case s_init:
-	              	  if(ev == ev_button_push)
-	              	  {
-	              		ev = ev_none;
-	              		ticks_left_in_state = 1500;
-	              		current_state = s_car_stopped;
-	              		set_traffic_lights(s_car_stopped);
-	              	  }
-	                	break;
-	                case s_car_go:
-	              	  if(ev == ev_button_push)
-	              	  {
-	              		  ev 				   = ev_none;
-	              		  current_state 	   = s_pushed_wait;
-	              		  ticks_left_in_state = 2000;
-	              		  set_traffic_lights(s_pushed_wait);
-	              		  abuzz_start();
-	              		  abuzz_p_long();
-	              	  }
-	                	  break;
-	                case s_pushed_wait:
-	              	  if (ev == ev_state_timeout)
-	              	  {
-	              		  ev = ev_none;
-	              		  current_state = s_cars_stopping;
-	              		  ticks_left_in_state = 1000;
-	              		  set_traffic_lights(s_cars_stopping);
-	              	  }
-	                	  break;
-	                case s_cars_stopping:
-	              	  if(ev == ev_state_timeout)
-	              	  {
-	              		  ev = ev_none;
-	              		  current_state = s_car_stopped;
-	              		  ticks_left_in_state = 1000;
-	              		  set_traffic_lights(s_car_stopped);
-	              		  abuzz_stop();
-	              	  }
-	                	  break;
-	                case s_car_stopped:
-	                    if ( ev == ev_state_timeout )
-	                    {
-	                        ev = ev_none; // clear event
-	                        current_state = s_go_people; // set next state
-	                        ticks_left_in_state = 2500; // set next timeout
-	                        set_traffic_lights(s_go_people);
-	                        abuzz_start();
-	                        abuzz_p_short(); // set output
-	                    }
-	                	 break;
-	                case s_go_people:
-	              	  if(ev == ev_state_timeout)
-	              	  {
-	              		  ev = ev_none;
-	              		  current_state = s_stop_people;
-	              		  ticks_left_in_state = 5000;
-	              		  set_traffic_lights(s_stop_people);
-	              		  abuzz_stop();
-	              	  }
-	                	break;
-	                case s_stop_people:
-	              	  if(ev == ev_state_timeout)
-	              	  {
-	              		  ev 		= ev_none;
-	              		  current_state    	= s_cars_wait;
-	              		  ticks_left_in_state = 2000;
-	              		  set_traffic_lights(s_cars_wait);
-	              	  }
-	                	 break;
-	                case s_cars_wait:
-	  			  	  if(ev == ev_state_timeout)
-	  			  	  {
-	  			  		  ev = ev_none;
-	  			  		  current_state= s_car_go;
-	  			  		  //ticks_left_in_state = 2000;
-	  			  		  set_traffic_lights(s_car_go);
-	  			  	  }
-	                	break;
-	                default:
-	                    break;
-	            }
+	            case s_init:
+	                if (ev == ev_button_push) {
+	                    ev = ev_none;  // Clear the event
+	                    ticks_left_in_state = 1500;  // Set the timer for the next state
+	                    current_state = s_car_stopped;
+	                    set_traffic_lights(s_car_stopped);  // Set lights for car stopped state
+	                }
+	                break;
+
+	            case s_car_go:
+	                if (ev == ev_button_push) {
+	                    ev = ev_none;
+	                    current_state = s_pushed_wait;
+	                    ticks_left_in_state = 2000;  // Waiting time after button push
+	                    set_traffic_lights(s_pushed_wait);
+	                    abuzz_start();
+	                    abuzz_p_long();  // Trigger sound for pushed_wait state
+	                }
+	                break;
+
+	            case s_pushed_wait:
+	                if (ev == ev_state_timeout) {
+	                    ev = ev_none;
+	                    current_state = s_cars_stopping;
+	                    ticks_left_in_state = 1000;  // Time to stop cars
+	                    set_traffic_lights(s_cars_stopping);
+	                }
+	                break;
+
+	            case s_cars_stopping:
+	                if (ev == ev_state_timeout) {
+	                    ev = ev_none;
+	                    current_state = s_car_stopped;
+	                    ticks_left_in_state = 1000;
+	                    set_traffic_lights(s_car_stopped);
+	                    abuzz_stop();  // Stop buzzing
+	                }
+	                break;
+
+	            case s_car_stopped:
+	                if (ev == ev_state_timeout) {
+	                    ev = ev_none;
+	                    current_state = s_go_people;
+	                    ticks_left_in_state = 2500;
+	                    set_traffic_lights(s_go_people);
+	                    abuzz_start();
+	                    abuzz_p_short();  // Start buzzing for people to go
+	                }
+	                break;
+
+	            case s_go_people:
+	                if (ev == ev_state_timeout) {
+	                    ev = ev_none;
+	                    current_state = s_stop_people;
+	                    ticks_left_in_state = 5000;  // People stop walking after this time
+	                    set_traffic_lights(s_stop_people);
+	                    abuzz_stop();
+	                }
+	                break;
+
+	            case s_stop_people:
+	                if (ev == ev_state_timeout) {
+	                    ev = ev_none;
+	                    current_state = s_cars_wait;
+	                    ticks_left_in_state = 2000;  // Cars wait before they start going
+	                    set_traffic_lights(s_cars_wait);
+	                }
+	                break;
+
+	            case s_cars_wait:
+	                if (ev == ev_state_timeout) {
+	                    ev = ev_none;
+	                    current_state = s_car_go;
+	                    set_traffic_lights(s_car_go);  // Allow cars to go again
+	                }
+	                break;
+
+	            default:
+	                break;
+	        }
+	    }
+	}
 
 	        // Here you can change the event to test state transitions
 	        //current_event = ev_button_push;
