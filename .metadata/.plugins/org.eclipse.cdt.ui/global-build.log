@@ -1,21 +1,21 @@
-10:17:34 **** Incremental Build of configuration Debug for project Lab0_Blinky ****
+16:04:41 **** Incremental Build of configuration Debug for project Lab1_Tarning ****
 make -j16 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "Lab0_Blinky.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\46700\Desktop\School Projects\MicroComputer_HT24\Lab0_Blinky\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Lab0_Blinky.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Lab0_Blinky.elf
+arm-none-eabi-gcc -o "Lab1_Tarning.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\46700\Desktop\School Projects\MicroComputer_HT24\Lab1_Tarning\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Lab1_Tarning.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Lab1_Tarning.elf
  
-arm-none-eabi-size  Lab0_Blinky.elf 
-arm-none-eabi-objdump -h -S Lab0_Blinky.elf  > "Lab0_Blinky.list"
+arm-none-eabi-size  Lab1_Tarning.elf 
+arm-none-eabi-objdump -h -S Lab1_Tarning.elf  > "Lab1_Tarning.list"
    text	   data	    bss	    dec	    hex	filename
-  11128	     92	   1972	  13192	   3388	Lab0_Blinky.elf
+   7780	     12	   1644	   9436	   24dc	Lab1_Tarning.elf
 Finished building: default.size.stdout
  
-Finished building: Lab0_Blinky.list
+Finished building: Lab1_Tarning.list
  
-10:17:38 **** Incremental Build of configuration Debug for project Lab0_Blinky ****
+16:04:44 **** Incremental Build of configuration Debug for project Lab1_Tarning ****
 make -j16 all 
-arm-none-eabi-size  Lab0_Blinky.elf 
+arm-none-eabi-size  Lab1_Tarning.elf 
    text	   data	    bss	    dec	    hex	filename
-  11128	     92	   1972	  13192	   3388	Lab0_Blinky.elf
+   7780	     12	   1644	   9436	   24dc	Lab1_Tarning.elf
 Finished building: default.size.stdout
  

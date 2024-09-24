@@ -51,11 +51,95 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
-
+int is_blue_button_pressed();
+void put_die_dots(uint8_t die_nbr);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+//returns 1 if blue button is pressed
+//returns 0 if blue button is unpressed'
+int is_blue_button_pressed()
+{
+	uint32_t reg_reading = GPIOC->IDR;
+	uint16_t blue_button = 1 << 13;
+
+	int bitValue = (reg_reading & blue_button) ? 1 : 0;
+	if(bitValue)
+	{
+		return 0;
+	}
+	else
+	{
+		return 1;
+	}
+
+}
+
+
+void put_die_dots(uint8_t die_nbr)
+{
+	//turn of all leds
+	HAL_GPIO_WritePin(DI_A_GPIO_Port, DI_A_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(DI_F_GPIO_Port, DI_F_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(DI_B_GPIO_Port, DI_B_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(DI_G_GPIO_Port, DI_G_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(DI_C_GPIO_Port, DI_C_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(DI_D_GPIO_Port, DI_D_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(DI_E_GPIO_Port, DI_E_Pin, GPIO_PIN_RESET);
+
+	//HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET);
+	//switch case
+	switch (die_nbr) {
+		case 1:
+			//uint16_t 	PA_8_pin = 0x01 << 8;
+			//HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_E_GPIO_Port, DI_E_Pin, GPIO_PIN_SET);
+			break;
+
+		case 2:
+			HAL_GPIO_WritePin(DI_A_GPIO_Port, DI_A_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_G_GPIO_Port, DI_G_Pin, GPIO_PIN_SET);
+			break;
+
+		case 3:
+			HAL_GPIO_WritePin(DI_E_GPIO_Port, DI_E_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_A_GPIO_Port, DI_A_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_G_GPIO_Port, DI_G_Pin, GPIO_PIN_SET);
+
+		case 4:
+			HAL_GPIO_WritePin(DI_A_GPIO_Port, DI_A_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_F_GPIO_Port, DI_F_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_B_GPIO_Port, DI_B_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_G_GPIO_Port, DI_G_Pin, GPIO_PIN_SET);
+
+		case 5:
+			HAL_GPIO_WritePin(DI_A_GPIO_Port, DI_A_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_F_GPIO_Port, DI_F_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_B_GPIO_Port, DI_B_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_G_GPIO_Port, DI_G_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_E_GPIO_Port, DI_E_Pin, GPIO_PIN_SET);
+
+		case 6:
+			HAL_GPIO_WritePin(DI_A_GPIO_Port, DI_A_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_F_GPIO_Port, DI_F_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_B_GPIO_Port, DI_B_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_G_GPIO_Port, DI_G_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_C_GPIO_Port, DI_C_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_D_GPIO_Port, DI_D_Pin, GPIO_PIN_SET);
+		default:
+			HAL_GPIO_WritePin(DI_A_GPIO_Port, DI_A_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_F_GPIO_Port, DI_F_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_B_GPIO_Port, DI_B_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_G_GPIO_Port, DI_G_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_C_GPIO_Port, DI_C_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_D_GPIO_Port, DI_D_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(DI_E_GPIO_Port, DI_E_Pin, GPIO_PIN_SET);
+	}
+
+}
+
+
 
 /* USER CODE END 0 */
 
@@ -90,15 +174,44 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+  //for loop to test if the functionality works
+  for (int i=0; i<7; i++) {
+	  put_die_dots(i);
+	  HAL_Delay(1000);
+  }
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  int pressed = 0;
   while (1)
   {
     /* USER CODE END WHILE */
+	  //pressed = HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin);
+	  pressed = is_blue_button_pressed();
 
+	  uint8_t die_value = 1; // 1 <= die value <= 6
+
+	  if (pressed)
+	  {
+		  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
+
+		  if (die_value == 6){
+			  die_value = 1;
+		  } else {
+			  HAL_Delay(100); //(FOR TESTING)
+			  die_value++;
+		  }
+	  }
+	  else
+	  {
+		  GPIO_TypeDef* Id2_gpio    = GPIOA;
+		  uint16_t      Id2_pin_nbr = 5;
+		  uint16_t 	    Id2_pin     = 0x01 << Id2_pin_nbr;
+		  HAL_GPIO_WritePin(Id2_gpio, Id2_pin, GPIO_PIN_RESET);
+		  put_die_dots(die_value);
+	  }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

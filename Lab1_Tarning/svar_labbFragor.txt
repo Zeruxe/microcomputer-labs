@@ -1,0 +1,43 @@
+1. Data minnet ligger i Little endian format 
+
+
+2. USART2 ligger på BUS: 1PB1
+
+
+3. GPIOC börjar på adressen - 0x4002 0000  
+
+
+4. GPIOC slutar på adressen - 0x40020BFF
+
+
+5. IDR står för input data register
+
+
+6. ODR står för output data register
+
+
+7. 4 ben 00, 01, 01, 11, kmr till tentan!!!
+
+
+8. läge "00"
+
+
+9. 16
+
+
+12. Flashminnet ligger melllan "0x4002 3C00 - 0x4002 3FFF"
+
+
+2.2 Frågor nedan:
+
+1. PC står på: 0x80004ca <main+6> när debuggern är pausad på HAL
+
+2. flash //bra att kunna till tentan
+
+3. Den släcks när du trycker på den blåa knappen - alltså är den aktivt låg.
+
+4. IDR, ODR
+
+5. systick
+
+6. 

@@ -1,0 +1,10 @@
+16:04:44 **** Incremental Build of configuration Debug for project Lab1_Tarning ****
+make -j16 all 
+arm-none-eabi-size  Lab1_Tarning.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7780	     12	   1644	   9436	   24dc	Lab1_Tarning.elf
+Finished building: default.size.stdout
+ 
+
+16:04:44 Build Finished. 0 errors, 0 warnings. (took 251ms)
+
