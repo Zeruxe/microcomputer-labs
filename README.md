@@ -11,13 +11,13 @@ Zakariya Mohammed Shafe
 Lab0_Blinky: Done!
 
 # Week 2
-Lab1       : in Progress!
+Lab1       : Done!
 
 # Week 3
-Lab2       : in Progress!
+Lab2       : Done!
 
 # Week 4
-Lab3       : in Progress!
+Lab3       : Done!
 
 # Week 5
 Lab4       : in Progress!
