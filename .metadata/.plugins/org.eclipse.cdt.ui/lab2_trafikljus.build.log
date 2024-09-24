@@ -1,0 +1,10 @@
+14:36:04 **** Incremental Build of configuration Debug for project lab2_trafikljus ****
+make -j16 all 
+arm-none-eabi-size  lab2_trafikljus.elf 
+   text	   data	    bss	    dec	    hex	filename
+  12740	     12	   1748	  14500	   38a4	lab2_trafikljus.elf
+Finished building: default.size.stdout
+ 
+
+14:36:05 Build Finished. 0 errors, 0 warnings. (took 573ms)
+

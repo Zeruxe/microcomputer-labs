@@ -1,21 +1,34 @@
-16:04:41 **** Incremental Build of configuration Debug for project Lab1_Tarning ****
+14:35:42 **** Incremental Build of configuration Debug for project lab2_trafikljus ****
 make -j16 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "Lab1_Tarning.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\46700\Desktop\School Projects\MicroComputer_HT24\Lab1_Tarning\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Lab1_Tarning.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Lab1_Tarning.elf
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:248:18: warning: variable 'last_button_press' set but not used [-Wunused-but-set-variable]
+  248 |         int      last_button_press;
+      |                  ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:247:18: warning: variable 'last_tick' set but not used [-Wunused-but-set-variable]
+  247 |         uint32_t last_tick = 0;
+      |                  ^~~~~~~~~
+../Core/Src/main.c:397:35: warning: 'current_button_press' may be used uninitialized [-Wmaybe-uninitialized]
+  397 |                 last_button_press = current_button_press;
+      |                 ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:249:18: note: 'current_button_press' was declared here
+  249 |         int      current_button_press;
+      |                  ^~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "lab2_trafikljus.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\46700\Desktop\School Projects\MicroComputer_HT24\lab2_trafikljus\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lab2_trafikljus.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lab2_trafikljus.elf
  
-arm-none-eabi-size  Lab1_Tarning.elf 
-arm-none-eabi-objdump -h -S Lab1_Tarning.elf  > "Lab1_Tarning.list"
+arm-none-eabi-size  lab2_trafikljus.elf 
+arm-none-eabi-objdump -h -S lab2_trafikljus.elf  > "lab2_trafikljus.list"
    text	   data	    bss	    dec	    hex	filename
-   7780	     12	   1644	   9436	   24dc	Lab1_Tarning.elf
+  12740	     12	   1748	  14500	   38a4	lab2_trafikljus.elf
 Finished building: default.size.stdout
  
-Finished building: Lab1_Tarning.list
+Finished building: lab2_trafikljus.list
  
-16:04:44 **** Incremental Build of configuration Debug for project Lab1_Tarning ****
+14:36:04 **** Incremental Build of configuration Debug for project lab2_trafikljus ****
 make -j16 all 
-arm-none-eabi-size  Lab1_Tarning.elf 
+arm-none-eabi-size  lab2_trafikljus.elf 
    text	   data	    bss	    dec	    hex	filename
-   7780	     12	   1644	   9436	   24dc	Lab1_Tarning.elf
+  12740	     12	   1748	  14500	   38a4	lab2_trafikljus.elf
 Finished building: default.size.stdout
  
