@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include <string.h>
+#include <lcd.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,6 +48,7 @@ void cd_tick(struct clock_data * pcd);
 
 void uart_print_cd(UART_HandleTypeDef * huart,
 					struct clock_data * pcd);
+void wait_for_button_press();
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -55,6 +57,8 @@ void uart_print_cd(UART_HandleTypeDef * huart,
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+I2C_HandleTypeDef hi2c1;
+
 TIM_HandleTypeDef htim1;
 
 UART_HandleTypeDef huart2;
@@ -63,6 +67,8 @@ UART_HandleTypeDef huart2;
 int exti_tim1;
 uint8_t half_second_flag = 0;
 uint8_t half_second_flag_n = 0;
+int button_pressed;
+TextLCDType lcd;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -70,6 +76,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_TIM1_Init(void);
+static void MX_I2C1_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -112,7 +119,7 @@ void uart_print_cd(UART_HandleTypeDef * huart,
 {
 	char str[100];
 
-	sprintf(str, "%d %d %d\r\n", pcd->hrs, pcd->min, pcd->sec);
+	sprintf(str, "%02d %02d %02d\r", pcd->hrs, pcd->min, pcd->sec);
 
 	HAL_UART_Transmit(huart, (uint8_t*) str, strlen(str), HAL_MAX_DELAY);
 }
@@ -121,8 +128,6 @@ void uart_print_cd(UART_HandleTypeDef * huart,
 void HAL_TIM_PeriodElapsedCallback( TIM_HandleTypeDef *htim)
 {
 
-	HAL_GPIO_TogglePin(Test_led_GPIO_Port, Test_led_Pin);
-
     if (htim->Instance == TIM1)
     {
         half_second_flag = !half_second_flag;
@@ -130,6 +135,33 @@ void HAL_TIM_PeriodElapsedCallback( TIM_HandleTypeDef *htim)
     }
 }
 
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+	while(HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == 0)
+	{
+
+	}
+
+	button_pressed = 1;
+}
+
+
+void wait_for_button_press(struct clock_data * pcd)
+{
+	char str[60];
+	while(!button_pressed)
+	{
+		  if (half_second_flag != half_second_flag_n)
+		  {
+			   cd_tick(pcd);
+			   TextLCD_Position(&lcd, 11, 1);
+			   half_second_flag_n = half_second_flag;
+			   sprintf(str, "%02d:%02d:%02d", pcd->hrs, pcd->min, pcd->sec);
+			   TextLCD_PutStr(&lcd, str);
+		  }
+	}
+	button_pressed = 0;
+}
 
 
 /* USER CODE END 0 */
@@ -165,19 +197,52 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   MX_TIM1_Init();
+  MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
+  TextLCD_Init(&lcd, &hi2c1, 0x4E);
   struct clock_data my_clock;
   cd_set(&my_clock, 23 , 59, 45);
-  HAL_TIM_Base_Start(&htim1);
+  HAL_TIM_Base_Start_IT(&htim1);
+
+
+
+
+  /*for (int i=0; i<5; i++)
+  {
+	  wait_for_button_press();
+	  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+  }*/
+
+
+  char c = 0;
+  const char ASCII_CAPITAL_OFFSET = 'A';
+  const char LETTERS_TOTAL = 'Z' - 'A';
+
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  for (int i=0; i<5; i++)
+	  {
+		  wait_for_button_press(&my_clock);
+		  TextLCD_PutChar(&lcd, c + ASCII_CAPITAL_OFFSET);
+		  c = (c+1) % LETTERS_TOTAL;
+	  }
 
+	  TextLCD_Clear(&lcd);
+	  TextLCD_Home(&lcd);
 
-	  if (half_second_flag != half_second_flag_n)
+	  TextLCD_PutStr(&lcd, "Hello World :)");
+
+	  TextLCD_Position(&lcd, 3, 1);
+
+	  TextLCD_PutChar(&lcd, 'Z');
+
+	  //Code for the timer, disabled for now
+	  /*if (half_second_flag != half_second_flag_n)
 	  {
 		   cd_tick(&my_clock);
 	  }
@@ -187,7 +252,7 @@ int main(void)
 	  half_second_flag_n = half_second_flag;
 
 
-	  uart_print_cd(&huart2, &my_clock);
+	  uart_print_cd(&huart2, &my_clock);*/
 
     /* USER CODE END WHILE */
 
@@ -240,6 +305,40 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief I2C1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C1_Init(void)
+{
+
+  /* USER CODE BEGIN I2C1_Init 0 */
+
+  /* USER CODE END I2C1_Init 0 */
+
+  /* USER CODE BEGIN I2C1_Init 1 */
+
+  /* USER CODE END I2C1_Init 1 */
+  hi2c1.Instance = I2C1;
+  hi2c1.Init.ClockSpeed = 100000;
+  hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
+  hi2c1.Init.OwnAddress1 = 0;
+  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c1.Init.OwnAddress2 = 0;
+  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C1_Init 2 */
+
+  /* USER CODE END I2C1_Init 2 */
+
 }
 
 /**
@@ -339,9 +438,6 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(Test_led_GPIO_Port, Test_led_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : B1_Pin */
@@ -350,19 +446,16 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : Test_led_Pin */
-  GPIO_InitStruct.Pin = Test_led_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(Test_led_GPIO_Port, &GPIO_InitStruct);
-
   /*Configure GPIO pin : LD2_Pin */
   GPIO_InitStruct.Pin = LD2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
