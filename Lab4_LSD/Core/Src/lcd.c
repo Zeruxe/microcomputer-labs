@@ -12,7 +12,38 @@
  */
 void My_Delay(uint32_t mysec)
 {
-	HAL_Delay( 1 + (mysec / 1000) );
+
+
+
+
+
+
+
+	//HAL_Delay( 1 + (mysec / 1000) );
+
+	uint16_t cr1 = TIM2->CR1;
+
+	cr1 = cr1 | 0x01;  //starta timern'
+
+	TIM2->CR1 = cr1;
+
+	uint32_t counter = TIM2->CNT;
+
+
+	while (mysec > counter)
+	{
+		counter = TIM2->CNT;
+	}
+
+	//STOPPA TIMER
+	cr1 = (cr1 & ~0x01);
+	TIM2->CR1 = cr1;
+
+
+	TIM2->CNT = 0X0000;
+
+
+
 }
 
 #define BIT_BT   0x08
@@ -88,6 +119,10 @@ void TextLCD_Init(
 		I2C_HandleTypeDef   *   hi2c,
 		uint8_t                 device_address)
 {
+
+	uint32_t dly = 5*1000*1000; //5 sekunder
+	My_Delay(dly);
+
 	hlcd->hi2c           = hi2c;
 	hlcd->device_address = device_address;
 
@@ -138,7 +173,11 @@ void TextLCD_Clear		(TextLCDType * hlcd)
 
 void TextLCD_SetDDRAMAdr(TextLCDType * hlcd, uint8_t adr)
 {
+	uint8_t new_ddram_adress = 0x80|adr; //first bit is set high, and the remaining bits represents the address
 
+	TextLCD_SendByte(hlcd, new_ddram_adress, RW);
+
+	My_Delay(37);
 }
 
 

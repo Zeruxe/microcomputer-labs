@@ -20,7 +20,7 @@ Lab2       : Done!
 Lab3       : Done!
 
 # Week 5
-Lab4       : in Progress!
+Lab4       : Done!
 
 # Week 6
 Lab5       : in Progress!
