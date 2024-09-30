@@ -1,34 +1,28 @@
-14:35:42 **** Incremental Build of configuration Debug for project lab2_trafikljus ****
+16:36:28 **** Incremental Build of configuration Debug for project Lab5_ADC ****
 make -j16 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:248:18: warning: variable 'last_button_press' set but not used [-Wunused-but-set-variable]
-  248 |         int      last_button_press;
-      |                  ^~~~~~~~~~~~~~~~~
-../Core/Src/main.c:247:18: warning: variable 'last_tick' set but not used [-Wunused-but-set-variable]
-  247 |         uint32_t last_tick = 0;
-      |                  ^~~~~~~~~
-../Core/Src/main.c:397:35: warning: 'current_button_press' may be used uninitialized [-Wmaybe-uninitialized]
-  397 |                 last_button_press = current_button_press;
-      |                 ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~
-../Core/Src/main.c:249:18: note: 'current_button_press' was declared here
-  249 |         int      current_button_press;
-      |                  ^~~~~~~~~~~~~~~~~~~~
-arm-none-eabi-gcc -o "lab2_trafikljus.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\46700\Desktop\School Projects\MicroComputer_HT24\lab2_trafikljus\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lab2_trafikljus.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: lab2_trafikljus.elf
+arm-none-eabi-gcc -o "Lab5_ADC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\46700\Desktop\School Projects\MicroComputer_HT24\Lab5_ADC\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Lab5_ADC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Lab5_ADC.elf
  
-arm-none-eabi-size  lab2_trafikljus.elf 
-arm-none-eabi-objdump -h -S lab2_trafikljus.elf  > "lab2_trafikljus.list"
+arm-none-eabi-size  Lab5_ADC.elf 
+arm-none-eabi-objdump -h -S Lab5_ADC.elf  > "Lab5_ADC.list"
    text	   data	    bss	    dec	    hex	filename
-  12740	     12	   1748	  14500	   38a4	lab2_trafikljus.elf
+  30852	    472	   2232	  33556	   8314	Lab5_ADC.elf
 Finished building: default.size.stdout
  
-Finished building: lab2_trafikljus.list
+Finished building: Lab5_ADC.list
  
-14:36:04 **** Incremental Build of configuration Debug for project lab2_trafikljus ****
+16:36:30 **** Incremental Build of configuration Debug for project Lab5_ADC ****
 make -j16 all 
-arm-none-eabi-size  lab2_trafikljus.elf 
+arm-none-eabi-size  Lab5_ADC.elf 
    text	   data	    bss	    dec	    hex	filename
-  12740	     12	   1748	  14500	   38a4	lab2_trafikljus.elf
+  30852	    472	   2232	  33556	   8314	Lab5_ADC.elf
+Finished building: default.size.stdout
+ 
+16:40:58 **** Incremental Build of configuration Debug for project Lab5_ADC ****
+make -j16 all 
+arm-none-eabi-size  Lab5_ADC.elf 
+   text	   data	    bss	    dec	    hex	filename
+  30852	    472	   2232	  33556	   8314	Lab5_ADC.elf
 Finished building: default.size.stdout
  

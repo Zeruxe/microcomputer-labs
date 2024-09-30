@@ -238,11 +238,11 @@ int main(void)
 	  TextLCD_Clear(&lcd);
 	  TextLCD_Home(&lcd);
 
-	  TextLCD_PutStr(&lcd, "Hello World :)");
+	  TextLCD_PutStr(&lcd, "Hello world:)");
 
 	  //TextLCD_Position(&lcd, 3, 1);
 	  TextLCD_SetDDRAMAdr(&lcd, 0x43);
-	  TextLCD_PutChar(&lcd, 'Z');
+	  TextLCD_PutChar(&lcd, 'Hi!');
 
 	  //Code for the timer, disabled for now
 	  /*if (half_second_flag != half_second_flag_n)
