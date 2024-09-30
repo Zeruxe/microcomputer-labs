@@ -1,0 +1,10 @@
+20:15:33 **** Incremental Build of configuration Debug for project Lab6_PWWM ****
+make -j16 all 
+arm-none-eabi-size  Lab6_PWWM.elf 
+   text	   data	    bss	    dec	    hex	filename
+  16864	     16	   1720	  18600	   48a8	Lab6_PWWM.elf
+Finished building: default.size.stdout
+ 
+
+20:15:33 Build Finished. 0 errors, 0 warnings. (took 250ms)
+
