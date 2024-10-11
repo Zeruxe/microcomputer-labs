@@ -55,7 +55,11 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+<<<<<<< HEAD
 
+=======
+extern ADC_HandleTypeDef hadc1;
+>>>>>>> 5583f1a8fb8de67c4706c5337204a4c28b7dd8bd
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -198,6 +202,23 @@ void SysTick_Handler(void)
 /* please refer to the startup file (startup_stm32f4xx.s).                    */
 /******************************************************************************/
 
+<<<<<<< HEAD
+=======
+/**
+  * @brief This function handles ADC1 global interrupt.
+  */
+void ADC_IRQHandler(void)
+{
+  /* USER CODE BEGIN ADC_IRQn 0 */
+
+  /* USER CODE END ADC_IRQn 0 */
+  HAL_ADC_IRQHandler(&hadc1);
+  /* USER CODE BEGIN ADC_IRQn 1 */
+
+  /* USER CODE END ADC_IRQn 1 */
+}
+
+>>>>>>> 5583f1a8fb8de67c4706c5337204a4c28b7dd8bd
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */

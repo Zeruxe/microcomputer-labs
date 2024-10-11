@@ -55,6 +55,10 @@ void SVC_Handler(void);
 void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
+<<<<<<< HEAD
+=======
+void ADC_IRQHandler(void);
+>>>>>>> 5583f1a8fb8de67c4706c5337204a4c28b7dd8bd
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */

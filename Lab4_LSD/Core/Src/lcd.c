@@ -13,17 +13,11 @@
 void My_Delay(uint32_t mysec)
 {
 
-
-
-
-
-
-
 	//HAL_Delay( 1 + (mysec / 1000) );
 
 	uint16_t cr1 = TIM2->CR1;
 
-	cr1 = cr1 | 0x01;  //starta timern'
+	cr1 = cr1 | 0x01;  //starta timern
 
 	TIM2->CR1 = cr1;
 
@@ -46,9 +40,6 @@ void My_Delay(uint32_t mysec)
 
 
 	TIM2->CNT = 0X0000;
-
-
-
 }
 
 #define BIT_BT   0x08

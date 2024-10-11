@@ -21,6 +21,16 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+<<<<<<< HEAD
+=======
+#include "lcd.h"
+#include <stdio.h>
+// I en header-fil eller i början av main.c
+#define ADC_BUF_SIZE 3  // Storlek på bufferten
+uint16_t adc_buffer[ADC_BUF_SIZE];
+int adc_buf_ix = 0;
+int main_flag = 0;
+>>>>>>> 5583f1a8fb8de67c4706c5337204a4c28b7dd8bd
 
 /* USER CODE END Includes */
 
@@ -31,7 +41,17 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+<<<<<<< HEAD
 
+=======
+uint16_t read_one_adc_value(ADC_HandleTypeDef * hadc);
+void HAL_ADC_ConvCpltCallback( ADC_HandleTypeDef *hadc );
+uint32_t HAL_ADC_GetValue( ADC_HandleTypeDef *hadc );
+HAL_StatusTypeDef HAL_ADC_Start_IT( ADC_HandleTypeDef *hadc );
+uint16_t test;
+float normalize_12bit(uint16_t x); // right in image
+float normalize_12bit_posneg(uint16_t x); // left in image
+>>>>>>> 5583f1a8fb8de67c4706c5337204a4c28b7dd8bd
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -49,7 +69,11 @@ TIM_HandleTypeDef htim2;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
+<<<<<<< HEAD
 
+=======
+TextLCDType lcd;
+>>>>>>> 5583f1a8fb8de67c4706c5337204a4c28b7dd8bd
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -65,7 +89,55 @@ static void MX_I2C1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+<<<<<<< HEAD
 
+=======
+uint16_t read_one_adc_value(ADC_HandleTypeDef * hadc)
+{
+	HAL_ADC_Start(hadc);
+	HAL_ADC_PollForConversion(hadc, 100);
+	uint32_t reading = HAL_ADC_GetValue(hadc);
+	HAL_ADC_Stop(hadc);
+	return (uint16_t) reading;
+}
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
+{
+    // Check if the correct ADC instance triggered the callback
+    if (hadc->Instance == ADC1)  // Change ADC1 to your specific ADC instance if needed
+    {
+        // Read the converted value from the ADC
+    	uint32_t reading;
+
+        // Save the value in the buffer
+        	reading = HAL_ADC_GetValue(hadc);
+            adc_buffer[adc_buf_ix] = reading;
+        	adc_buf_ix++;
+            if (adc_buf_ix >= ADC_BUF_SIZE)
+            {
+                adc_buf_ix = 0;
+                main_flag = 1;
+            }
+
+
+        /*adc_buf_ix++;
+        if (adc_buf_ix >= ADC_BUF_SIZE) {
+            adc_buf_ix = 0;
+            main_flag = 1;				// Reset index if buffer is full
+        }*/
+
+        // Start the next ADC conversion
+        //HAL_ADC_Start_IT(hadc);  // Start the next conversion in interrupt mode
+    }
+}
+float normalize_12bit(uint16_t x) {
+    return (float)x / 4095.0f;  // 12-bit max value is 4095
+}
+
+// Normalize value to the range of -1.0 to 1.0
+float normalize_12bit_posneg(uint16_t x) {
+    return ((float)x / 2047.5f) - 1.0f;  // Shifts the range from 0-4095 to -1.0 to 1.0
+}
+>>>>>>> 5583f1a8fb8de67c4706c5337204a4c28b7dd8bd
 /* USER CODE END 0 */
 
 /**
@@ -102,17 +174,64 @@ int main(void)
   MX_TIM2_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
+<<<<<<< HEAD
 
+=======
+  TextLCD_Init(&lcd, &hi2c1, 0x4E);
+>>>>>>> 5583f1a8fb8de67c4706c5337204a4c28b7dd8bd
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+<<<<<<< HEAD
   while (1)
   {
+=======
+  HAL_ADC_Start_IT(&hadc1);  // Start the next conversion in interrupt mode
+  while (1)
+  {
+
+
+
+      while (main_flag != 1)
+      {
+
+      }
+
+
+      // Read a value from the ADC
+      //uint16_t test = read_one_adc_value(&hadc1);
+
+      // Buffers to store the formatted strings
+      char bufferpos[10];
+      char bufferneg[10];
+      char bufferfoto[10];
+
+      // Using sprintf to call the normalize functions
+      sprintf(bufferpos, "%+.2fy", normalize_12bit(adc_buffer[2]));
+      sprintf(bufferneg, "%+.2fx", normalize_12bit_posneg(adc_buffer[0]));
+      sprintf(bufferfoto, "%.3fL", normalize_12bit(adc_buffer[1]));
+
+      // Set cursor to a specific position for the first value (row 0, column 1)
+      TextLCD_Position(&lcd, 0, 1);  // Adjust row and column as needed
+      TextLCD_PutStr(&lcd, bufferpos);
+
+      // Set cursor to another position for the second value (row 1, column 0)
+      TextLCD_Position(&lcd, 0, 0);  // Adjust row and column as needed
+      TextLCD_PutStr(&lcd, bufferneg);
+
+      TextLCD_Position(&lcd, 10, 0);  // Adjust row and column as needed
+      TextLCD_PutStr(&lcd, bufferfoto);
+
+>>>>>>> 5583f1a8fb8de67c4706c5337204a4c28b7dd8bd
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5583f1a8fb8de67c4706c5337204a4c28b7dd8bd
   /* USER CODE END 3 */
 }
 
@@ -185,13 +304,22 @@ static void MX_ADC1_Init(void)
   hadc1.Instance = ADC1;
   hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
   hadc1.Init.Resolution = ADC_RESOLUTION_12B;
+<<<<<<< HEAD
   hadc1.Init.ScanConvMode = DISABLE;
   hadc1.Init.ContinuousConvMode = DISABLE;
+=======
+  hadc1.Init.ScanConvMode = ENABLE;
+  hadc1.Init.ContinuousConvMode = ENABLE;
+>>>>>>> 5583f1a8fb8de67c4706c5337204a4c28b7dd8bd
   hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
   hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+<<<<<<< HEAD
   hadc1.Init.NbrOfConversion = 1;
+=======
+  hadc1.Init.NbrOfConversion = 3;
+>>>>>>> 5583f1a8fb8de67c4706c5337204a4c28b7dd8bd
   hadc1.Init.DMAContinuousRequests = DISABLE;
   hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
   if (HAL_ADC_Init(&hadc1) != HAL_OK)
@@ -203,7 +331,29 @@ static void MX_ADC1_Init(void)
   */
   sConfig.Channel = ADC_CHANNEL_0;
   sConfig.Rank = 1;
+<<<<<<< HEAD
   sConfig.SamplingTime = ADC_SAMPLETIME_15CYCLES;
+=======
+  sConfig.SamplingTime = ADC_SAMPLETIME_480CYCLES;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_1;
+  sConfig.Rank = 2;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_4;
+  sConfig.Rank = 3;
+>>>>>>> 5583f1a8fb8de67c4706c5337204a4c28b7dd8bd
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
     Error_Handler();

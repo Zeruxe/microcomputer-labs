@@ -1,0 +1,10 @@
+13:28:00 **** Incremental Build of configuration Debug for project Lab4_LSD ****
+make -j16 all 
+arm-none-eabi-size  Lab4_LSD.elf 
+   text	   data	    bss	    dec	    hex	filename
+  17224	     96	   2224	  19544	   4c58	Lab4_LSD.elf
+Finished building: default.size.stdout
+ 
+
+13:28:00 Build Finished. 0 errors, 0 warnings. (took 252ms)
+

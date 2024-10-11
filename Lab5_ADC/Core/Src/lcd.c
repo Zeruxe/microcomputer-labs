@@ -13,32 +13,21 @@
 void My_Delay(uint32_t mysec)
 {
 
-
-
-
-
-
-
 	//HAL_Delay( 1 + (mysec / 1000) );
 
 	uint16_t cr1 = TIM2->CR1;
 
-	cr1 = cr1 | 0x01;  //starta timern'
+	cr1 = cr1 | 0x01;  //starta timern
 
 	TIM2->CR1 = cr1;
 
 	uint32_t counter = TIM2->CNT;
 
-	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
-
 
 	while (mysec > counter)
 	{
-
+		counter = TIM2->CNT;
 	}
-
-	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-
 
 	//STOPPA TIMER
 	cr1 = (cr1 & ~0x01);
@@ -46,9 +35,6 @@ void My_Delay(uint32_t mysec)
 
 
 	TIM2->CNT = 0X0000;
-
-
-
 }
 
 #define BIT_BT   0x08
