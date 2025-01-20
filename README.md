@@ -54,6 +54,26 @@ This course introduces the theoretical and practical aspects of microcontroller 
 - **Lab Focus**: Work with PWM to control devices like motors or LEDs.
 
 ---
+## Step-by-Step Guide for Running the Program
+
+1. **Install Required Tools**:
+   - Install **STM32CubeIDE** and necessary drivers for your STM32 microcontroller.
+
+2. **Create a New Project**:
+   - Open STM32CubeIDE and create a new project for your STM32 microcontroller.
+   - Select the correct **microcontroller model** and configure the project.
+
+3. **Configure the Microcontroller**:
+   - Use STM32CubeMX to set up **clocks, peripherals**, and **GPIO pins**.
+
+4. **Write the Program**:
+   - Write the C code based on the lab requirements (e.g., state machine, display control, etc.).
+
+5. **Build the Project**:
+   - Click "Build" to compile the project and resolve any errors.
+
+6. **Flash the Program**:
+   - Connect the STM32 microcontroller and flash the compiled program using STM32CubeIDE.
 
 ## License
 
